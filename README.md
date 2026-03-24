@@ -24,6 +24,4 @@ It allows users to:
   - Nouf Nawaf Albalawi -2240005319
   - Lian Sahel Almutairi-2240004225
   - Khulud maser Almutairi-2240007031
-  -  Farah AbdulRaouf Kkan-2240006075
-  
-  -
+  -  Farah AbdulRaouf Kkan-2240006075  
