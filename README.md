@@ -5,7 +5,7 @@ Salon Finder is a web application that connects users with salons, making it eas
 - Women looking for salons and beauty services
 - Users searching for affordable or discounted services
 - Salon owners who want to promote their services
--   ## Problem
+  ## Problem
 Users often face diffculty finding suitable salons a specific area and comparing prices or offers.At the same time , many salons struggle to raech new customers and promote their services effectively.
 ## Solution
 Salon Finder acts as an intermediary platform between customers and salons.
