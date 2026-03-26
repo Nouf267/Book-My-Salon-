@@ -1,6 +1,6 @@
-# SalonFinder
+# Book My Salon
 ## Project Idea
-Salon Finder is a web application that connects users with salons, making it easier to search,compare,and choose the most suitable salon based on location,price, and available offers.
+Book My Salon is a web application that connects users with salons, making it easier to search,compare,and choose the most suitable salon based on location,price, and available offers.
 ## Target Users
 - Women looking for salons and beauty services
 - Users searching for affordable or discounted services
@@ -8,7 +8,7 @@ Salon Finder is a web application that connects users with salons, making it eas
   ## Problem
 Users often face diffculty finding suitable salons a specific area and comparing prices or offers.At the same time , many salons struggle to raech new customers and promote their services effectively.
 ## Solution
-Salon Finder acts as an intermediary platform between customers and salons.
+Book My Salon acts as an intermediary platform between customers and salons.
 It allows users to:
 - Select a specific location 
 - Browse available salons 
