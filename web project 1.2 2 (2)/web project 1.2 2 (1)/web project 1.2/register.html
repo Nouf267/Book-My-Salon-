@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BookMySalon - Register</title>
+
+<style>
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,sans-serif;
+overflow-x:hidden;
+min-height:100vh;
+background-image:linear-gradient(rgba(255,248,240,0.85),rgba(255,248,240,0.85)),url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600');
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+background-repeat:no-repeat;
+}
+
+header{
+width:100%;
+background-color:#000;
+padding:14px 20px;
+text-align:center;
+}
+
+header .home-btn{
+background-color:white;
+color:black;
+border:none;
+padding:10px 20px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;
+border-radius:5px;
+font-family:Arial,sans-serif;
+transition:background-color 0.3s;
+}
+
+header .home-btn:hover{
+background-color:#ddd;
+}
+
+.register-container{
+display:flex;
+justify-content:center;
+padding:40px 20px 60px;
+}
+
+.form-box{
+background:white;
+border-radius:10px;
+padding:40px 35px;
+width:100%;
+max-width:450px;
+box-shadow:0 4px 20px rgba(0,0,0,0.2);
+}
+
+h1{
+font-size:28px;
+font-weight:bold;
+color:#333;
+margin-bottom:8px;
+cursor:default;
+}
+
+.subtitle{
+font-size:15px;
+color:#555;
+font-weight:bold;
+margin-bottom:25px;
+}
+
+.form-group{
+margin-bottom:18px;
+}
+
+.form-group label{
+display:block;
+font-weight:bold;
+margin-bottom:6px;
+color:#333;
+font-size:15px;
+}
+
+.form-group input{
+width:100%;
+padding:10px 14px;
+border:1.5px solid #ccc;
+border-radius:8px;
+font-size:15px;
+font-family:Arial,sans-serif;
+transition:border 0.2s;
+}
+
+.form-group input:focus{
+outline:none;
+border-color:#000;
+}
+
+.error-msg{
+color:#d9534f;
+font-size:13px;
+margin-top:5px;
+display:none;
+}
+
+.form-group input.input-error{
+border-color:#d9534f;
+}
+
+.password-hint{
+background-color:#f8f8f8;
+border-left:3px solid #000;
+padding:8px 12px;
+margin-top:6px;
+font-size:12px;
+color:#555;
+border-radius:4px;
+}
+
+.password-hint p{
+margin:2px 0;
+}
+
+.password-box{
+position:relative;
+}
+
+.toggle-password{
+position:absolute;
+top:50%;
+right:10px;
+transform:translateY(-50%);
+background:none;
+border:none;
+cursor:pointer;
+font-size:18px;
+color:#555;
+padding:0;
+}
+
+button.register-btn{
+background-color:#000;
+color:white;
+border:none;
+padding:15px 30px;
+font-size:18px;
+cursor:pointer;
+border-radius:8px;
+transition:background-color 0.3s,box-shadow 0.3s;
+width:100%;
+margin-top:8px;
+}
+
+button.register-btn:hover,
+button.register-btn:focus{
+background-color:#aaa;
+outline:none;
+box-shadow:0 0 5px #333;
+}
+
+.login-link{
+text-align:center;
+margin-top:16px;
+font-size:14px;
+color:#555;
+}
+
+.login-link a{
+color:#000;
+font-weight:bold;
+text-decoration:none;
+}
+
+.login-link a:hover{
+text-decoration:underline;
+}
+
+footer{
+color:#fff;
+background-color:rgba(0,0,0,0.7);
+padding:20px 0;
+text-align:center;
+margin-top:10px;
+}
+
+footer a{
+color:#f8c471;
+text-decoration:none;
+font-weight:bold;
+}
+
+footer a:hover{
+text-decoration:underline;
+}
+
+footer .contact p,
+footer .copyright p{
+margin:5px 0;
+font-size:16px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<button class="home-btn" onclick="location.href='home.html'">home</button>
+</header>
+
+<main>
+
+<section class="register-container">
+
+<form class="form-box">
+
+<h1>Create Account</h1>
+
+<p class="subtitle">
+Register to start booking your appointments!
+</p>
+
+<section class="form-group">
+<label for="name">Full Name</label>
+<input type="text" id="name" placeholder="Enter your full name">
+<p class="error-msg" id="nameError"></p>
+</section>
+
+<section class="form-group">
+<label for="email">Email</label>
+<input type="email" id="email" placeholder="example@gmail.com">
+<p class="error-msg" id="emailError"></p>
+</section>
+
+<section class="form-group">
+<label for="phone">Phone Number</label>
+<input type="tel" id="phone" placeholder="05XXXXXXXX" maxlength="10">
+<p class="error-msg" id="phoneError"></p>
+</section>
+
+<section class="form-group">
+
+<label for="password">Password</label>
+
+<section class="password-box">
+
+<input type="password" id="password" placeholder="Create a strong password">
+
+<button type="button" class="toggle-password" onclick="togglePassword('password','eye1')">
+<span id="eye1">👁️</span>
+</button>
+
+</section>
+
+<section class="password-hint">
+<p>Password must contain:</p>
+<p>• At least 8 characters</p>
+<p>• One uppercase letter (A-Z)</p>
+<p>• One lowercase letter (a-z)</p>
+<p>• One number (0-8)</p>
+<p>• One special character (! @ # $ % etc.)</p>
+</section>
+
+<p class="error-msg" id="passwordError"></p>
+
+</section>
+
+<section class="form-group">
+
+<label for="confirm">Confirm Password</label>
+
+<section class="password-box">
+
+<input type="password" id="confirm" placeholder="Repeat your password">
+
+<button type="button" class="toggle-password" onclick="togglePassword('confirm','eye2')">
+<span id="eye2">🫣</span>
+</button>
+
+</section>
+
+<p class="error-msg" id="confirmError"></p>
+
+</section>
+
+<button type="button" class="register-btn" onclick="register()">
+Register
+</button>
+
+<p class="login-link">
+Already have an account?
+<a href="log.html">Login here</a>
+</p>
+
+</form>
+
+</section>
+
+</main>
+
+<footer>
+
+<section class="contact">
+<p>
+Contact us on WhatsApp:
+<a href="https://wa.me/966580417226" target="_blank">
++966 58 041 7226
+</a>
+</p>
+</section>
+
+<section class="copyright">
+<p>&copy; 2026 BookMySalon. All rights reserved.</p>
+</section>
+
+</footer>
+
+<script>
+document.getElementById('phone').oninput=function(){
+this.value=this.value.replace(/[^0-9]/g,'');
+};
+
+function togglePassword(inputId,eyeId){
+var input=document.getElementById(inputId);
+var eye=document.getElementById(eyeId);
+
+if(input.type==="password"){
+input.type="text";
+eye.innerText="👁️";
+}else{
+input.type="password";
+eye.innerText="🫣";
+}
+}
+
+function showError(inputId,errorId,message){
+document.getElementById(inputId).classList.add('input-error');
+
+var errorElement=document.getElementById(errorId);
+
+errorElement.innerText=message;
+errorElement.style.display='block';
+}
+
+function clearErrors(){
+var errors=document.getElementsByClassName('error-msg');
+var inputs=document.querySelectorAll('.form-group input');
+
+for(var i=0;i<errors.length;i++){
+errors[i].style.display='none';
+errors[i].innerText='';
+}
+
+for(var j=0;j<inputs.length;j++){
+inputs[j].classList.remove('input-error');
+}
+}
+
+function checkPasswordStrength(password){
+var hasUpper=false;
+var hasLower=false;
+var hasNumber=false;
+var hasSpecial=false;
+
+var specialChars="!@#$%^&*()_-+=[]{};:'\",.<>?/\\|`~";
+
+for(var i=0;i<password.length;i++){
+var ch=password.charAt(i);
+
+if(ch>='A'&&ch<='Z')hasUpper=true;
+else if(ch>='a'&&ch<='z')hasLower=true;
+else if(ch>='0'&&ch<='9')hasNumber=true;
+else if(specialChars.indexOf(ch)!==-1)hasSpecial=true;
+}
+
+return{
+hasUpper:hasUpper,
+hasLower:hasLower,
+hasNumber:hasNumber,
+hasSpecial:hasSpecial
+};
+}
+
+function register(){
+
+clearErrors();
+
+var name=document.getElementById('name').value.trim();
+var email=document.getElementById('email').value.trim();
+var phone=document.getElementById('phone').value.trim();
+var password=document.getElementById('password').value;
+var confirm=document.getElementById('confirm').value;
+
+var isValid=true;
+
+if(name===""){
+showError('name','nameError','⚠️ This field is empty.');
+isValid=false;
+}else if(name.length<3){
+showError('name','nameError','⚠️ Name must be at least 3 characters.');
+isValid=false;
+}else if(!/^[a-zA-Z\s]+$/.test(name)){
+showError('name','nameError','⚠️ Name must contain only letters and spaces.');
+isValid=false;
+}
+
+if(email===""){
+showError('email','emailError','⚠️ This field is empty.');
+isValid=false;
+}else if(email.indexOf('@')===-1||email.indexOf('.')===-1){
+showError('email','emailError','⚠️ Invalid email. Example: name@gmail.com');
+isValid=false;
+}else if(email.indexOf('@')===0||email.indexOf('.')===email.length-1){
+showError('email','emailError','⚠️ Invalid email format.');
+isValid=false;
+}else if(localStorage.getItem('user_'+email)){
+showError('email','emailError','⚠️ This email is already registered.');
+isValid=false;
+}
+
+if(phone===""){
+showError('phone','phoneError','⚠️ This field is empty.');
+isValid=false;
+}else if(phone.length!==10){
+showError('phone','phoneError','⚠️ Phone must be exactly 10 digits.');
+isValid=false;
+}else if(phone.charAt(0)!=='0'||phone.charAt(1)!=='5'){
+showError('phone','phoneError','⚠️ Phone must start with 05.');
+isValid=false;
+}
+
+if(password===""){
+showError('password','passwordError','⚠️ This field is empty.');
+isValid=false;
+}else if(password.length<8){
+showError('password','passwordError','⚠️ Password must be at least 8 characters.');
+isValid=false;
+}else{
+var strength=checkPasswordStrength(password);
+
+if(!strength.hasUpper){
+showError('password','passwordError','⚠️ Password must contain an uppercase letter.');
+isValid=false;
+}else if(!strength.hasLower){
+showError('password','passwordError','⚠️ Password must contain a lowercase letter.');
+isValid=false;
+}else if(!strength.hasNumber){
+showError('password','passwordError','⚠️ Password must contain a number.');
+isValid=false;
+}else if(!strength.hasSpecial){
+showError('password','passwordError','⚠️ Password must contain a special character.');
+isValid=false;
+}
+}
+
+if(confirm===""){
+showError('confirm','confirmError','⚠️ This field is empty.');
+isValid=false;
+}else if(password!==confirm){
+showError('confirm','confirmError','⚠️ Passwords do not match.');
+isValid=false;
+}
+
+if(isValid===false){
+return;
+}
+
+var user={
+name:name,
+email:email,
+phone:phone,
+password:password
+};
+
+localStorage.setItem('user_'+email,JSON.stringify(user));
+
+alert('✅ Account created successfully!\nYou can now log in.');
+
+location.href='log.html';
+}
+
+document.getElementById('name').oninput=function(){
+
+let name=this.value.trim();
+
+if(name===""){
+showError('name','nameError','⚠️ This field is empty.');
+}else if(name.length<3){
+showError('name','nameError','⚠️ Name must be at least 3 characters.');
+}else if(!/^[a-zA-Z\s]+$/.test(name)){
+showError('name','nameError','⚠️ Name must contain only letters and spaces.');
+}else{
+document.getElementById('nameError').style.display='none';
+document.getElementById('name').classList.remove('input-error');
+}
+};
+
+document.getElementById('email').oninput=function(){
+
+let email=this.value.trim();
+
+if(email===""){
+showError('email','emailError','⚠️ This field is empty.');
+}else if(email.indexOf('@')===-1||email.indexOf('.')===-1){
+showError('email','emailError','⚠️ Invalid email. Example: name@gmail.com');
+}else if(email.indexOf('@')===0||email.indexOf('.')===email.length-1){
+showError('email','emailError','⚠️ Invalid email format.');
+}else if(localStorage.getItem('user_'+email)){
+showError('email','emailError','⚠️ This email is already registered.');
+}else{
+document.getElementById('emailError').style.display='none';
+document.getElementById('email').classList.remove('input-error');
+}
+};
+
+document.getElementById('phone').oninput=function(){
+
+let phone=this.value.trim();
+
+if(phone===""){
+showError('phone','phoneError','⚠️ This field is empty.');
+}else if(phone.length!==10){
+showError('phone','phoneError','⚠️ Phone must be exactly 10 digits.');
+}else if(phone.charAt(0)!=='0'||phone.charAt(1)!=='5'){
+showError('phone','phoneError','⚠️ Phone must start with 05.');
+}else{
+document.getElementById('phoneError').style.display='none';
+document.getElementById('phone').classList.remove('input-error');
+}
+};
+
+document.getElementById('password').oninput=function(){
+
+let password=this.value.trim();
+
+if(password===""){
+showError('password','passwordError','⚠️ This field is empty.');
+}else if(password.length<8){
+showError('password','passwordError','⚠️ Password must be at least 8 characters.');
+}else{
+
+var strength=checkPasswordStrength(password);
+
+if(!strength.hasUpper){
+showError('password','passwordError','⚠️ Password must contain an uppercase letter.');
+}else if(!strength.hasLower){
+showError('password','passwordError','⚠️ Password must contain a lowercase letter.');
+}else if(!strength.hasNumber){
+showError('password','passwordError','⚠️ Password must contain a number.');
+}else if(!strength.hasSpecial){
+showError('password','passwordError','⚠️ Password must contain a special character.');
+}else{
+document.getElementById('passwordError').style.display='none';
+document.getElementById('password').classList.remove('input-error');
+}
+}
+};
+</script>
+
+</body>
+</html>
