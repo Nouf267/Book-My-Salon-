@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>BookMySalon - Register</title>
-
 <style>
 *{
 box-sizing:border-box;
@@ -15,6 +14,8 @@ body{
 font-family:Arial,sans-serif;
 overflow-x:hidden;
 min-height:100vh;
+display:flex;
+flex-direction:column;
 background-image:linear-gradient(rgba(255,248,240,0.85),rgba(255,248,240,0.85)),url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600');
 background-size:cover;
 background-position:center;
@@ -50,6 +51,7 @@ background-color:#ddd;
 display:flex;
 justify-content:center;
 padding:40px 20px 60px;
+flex:1;
 }
 
 .form-box{
@@ -59,6 +61,7 @@ padding:40px 35px;
 width:100%;
 max-width:450px;
 box-shadow:0 4px 20px rgba(0,0,0,0.2);
+height:fit-content;
 }
 
 h1{
@@ -74,6 +77,39 @@ font-size:15px;
 color:#555;
 font-weight:bold;
 margin-bottom:25px;
+}
+
+.user-type-selector{
+display:flex;
+gap:10px;
+margin-bottom:25px;
+background:#f5f5f5;
+padding:5px;
+border-radius:8px;
+}
+
+.user-type-btn{
+flex:1;
+padding:12px;
+background:transparent;
+border:none;
+border-radius:6px;
+font-size:15px;
+font-weight:bold;
+color:#555;
+cursor:pointer;
+transition:all 0.3s;
+font-family:Arial,sans-serif;
+}
+
+.user-type-btn.active{
+background-color:#000;
+color:white;
+box-shadow:0 2px 8px rgba(0,0,0,0.2);
+}
+
+.user-type-btn:hover:not(.active){
+background-color:#e0e0e0;
 }
 
 .form-group{
@@ -103,15 +139,15 @@ outline:none;
 border-color:#000;
 }
 
+.form-group input.input-error{
+border-color:#d9534f;
+}
+
 .error-msg{
 color:#d9534f;
 font-size:13px;
 margin-top:5px;
 display:none;
-}
-
-.form-group input.input-error{
-border-color:#d9534f;
 }
 
 .password-hint{
@@ -187,7 +223,6 @@ color:#fff;
 background-color:rgba(0,0,0,0.7);
 padding:20px 0;
 text-align:center;
-margin-top:10px;
 }
 
 footer a{
@@ -205,13 +240,19 @@ footer .copyright p{
 margin:5px 0;
 font-size:16px;
 }
+
 </style>
+
 </head>
 
 <body>
 
 <header>
-<button class="home-btn" onclick="location.href='home.html'">home</button>
+
+<button class="home-btn" onclick="location.href='home.html'">
+Home
+</button>
+
 </header>
 
 <main>
@@ -226,22 +267,56 @@ font-size:16px;
 Register to start booking your appointments!
 </p>
 
+<div class="user-type-selector">
+
+<button type="button" class="user-type-btn active" id="userTypeBtn" onclick="selectType('user')">
+👤 User
+</button>
+
+<button type="button" class="user-type-btn" id="businessTypeBtn" onclick="selectType('business')">
+🏢 Business
+</button>
+
+</div>
+
+<section class="form-group" id="businessNameGroup" style="display:none;">
+
+<label for="businessName">Business Name</label>
+
+<input type="text" id="businessName" placeholder="e.g. Glamour Studio">
+
+<p class="error-msg" id="businessNameError"></p>
+
+</section>
+
 <section class="form-group">
-<label for="name">Full Name</label>
+
+<label for="name" id="nameLabel">Full Name</label>
+
 <input type="text" id="name" placeholder="Enter your full name">
+
 <p class="error-msg" id="nameError"></p>
+
 </section>
 
 <section class="form-group">
+
 <label for="email">Email</label>
+
 <input type="email" id="email" placeholder="example@gmail.com">
+
 <p class="error-msg" id="emailError"></p>
+
 </section>
 
 <section class="form-group">
+
 <label for="phone">Phone Number</label>
+
 <input type="tel" id="phone" placeholder="05XXXXXXXX" maxlength="10">
+
 <p class="error-msg" id="phoneError"></p>
+
 </section>
 
 <section class="form-group">
@@ -253,18 +328,27 @@ Register to start booking your appointments!
 <input type="password" id="password" placeholder="Create a strong password">
 
 <button type="button" class="toggle-password" onclick="togglePassword('password','eye1')">
-<span id="eye1">👁️</span>
+
+<span id="eye1">🫣</span>
+
 </button>
 
 </section>
 
 <section class="password-hint">
+
 <p>Password must contain:</p>
+
 <p>• At least 8 characters</p>
+
 <p>• One uppercase letter (A-Z)</p>
+
 <p>• One lowercase letter (a-z)</p>
-<p>• One number (0-8)</p>
+
+<p>• One number (0-9)</p>
+
 <p>• One special character (! @ # $ % etc.)</p>
+
 </section>
 
 <p class="error-msg" id="passwordError"></p>
@@ -280,7 +364,9 @@ Register to start booking your appointments!
 <input type="password" id="confirm" placeholder="Repeat your password">
 
 <button type="button" class="toggle-password" onclick="togglePassword('confirm','eye2')">
+
 <span id="eye2">🫣</span>
+
 </button>
 
 </section>
@@ -307,261 +393,430 @@ Already have an account?
 <footer>
 
 <section class="contact">
+
 <p>
 Contact us on WhatsApp:
 <a href="https://wa.me/966580417226" target="_blank">
 +966 58 041 7226
 </a>
 </p>
+
 </section>
 
 <section class="copyright">
+
 <p>&copy; 2026 BookMySalon. All rights reserved.</p>
+
 </section>
 
 </footer>
 
 <script>
-document.getElementById('phone').oninput=function(){
-this.value=this.value.replace(/[^0-9]/g,'');
-};
 
-function togglePassword(inputId,eyeId){
-var input=document.getElementById(inputId);
-var eye=document.getElementById(eyeId);
+let selectedType='user';
 
-if(input.type==="password"){
-input.type="text";
-eye.innerText="👁️";
-}else{
-input.type="password";
-eye.innerText="🫣";
+function selectType(type){
+
+selectedType=type;
+
+let userBtn=document.getElementById('userTypeBtn');
+
+let businessBtn=document.getElementById('businessTypeBtn');
+
+let bizGroup=document.getElementById('businessNameGroup');
+
+let nameLabel=document.getElementById('nameLabel');
+
+if(type==='user'){
+
+userBtn.className='user-type-btn active';
+
+businessBtn.className='user-type-btn';
+
+bizGroup.style.display='none';
+
+nameLabel.innerText='Full Name';
+
+document.getElementById('name').placeholder='Enter your full name';
+
 }
+else{
+
+userBtn.className='user-type-btn';
+
+businessBtn.className='user-type-btn active';
+
+bizGroup.style.display='block';
+
+nameLabel.innerText='Owner Name';
+
+document.getElementById('name').placeholder='Enter owner full name';
+
+}
+
+clearErrors();
 }
 
 function showError(inputId,errorId,message){
+
 document.getElementById(inputId).classList.add('input-error');
 
-var errorElement=document.getElementById(errorId);
+let el=document.getElementById(errorId);
 
-errorElement.innerText=message;
-errorElement.style.display='block';
+el.innerText=message;
+
+el.style.display='block';
+
+}
+
+function clearError(inputId,errorId){
+
+document.getElementById(inputId).classList.remove('input-error');
+
+document.getElementById(errorId).style.display='none';
+
 }
 
 function clearErrors(){
-var errors=document.getElementsByClassName('error-msg');
-var inputs=document.querySelectorAll('.form-group input');
 
-for(var i=0;i<errors.length;i++){
-errors[i].style.display='none';
-errors[i].innerText='';
+let msgs=document.getElementsByClassName('error-msg');
+
+let inputs=document.querySelectorAll('.form-group input');
+
+for(let i=0;i<msgs.length;i++){
+msgs[i].style.display='none';
 }
 
-for(var j=0;j<inputs.length;j++){
+for(let j=0;j<inputs.length;j++){
 inputs[j].classList.remove('input-error');
 }
 }
 
-function checkPasswordStrength(password){
-var hasUpper=false;
-var hasLower=false;
-var hasNumber=false;
-var hasSpecial=false;
+function togglePassword(inputId,eyeId){
 
-var specialChars="!@#$%^&*()_-+=[]{};:'\",.<>?/\\|`~";
+let input=document.getElementById(inputId);
 
-for(var i=0;i<password.length;i++){
-var ch=password.charAt(i);
+let eye=document.getElementById(eyeId);
 
-if(ch>='A'&&ch<='Z')hasUpper=true;
-else if(ch>='a'&&ch<='z')hasLower=true;
-else if(ch>='0'&&ch<='9')hasNumber=true;
-else if(specialChars.indexOf(ch)!==-1)hasSpecial=true;
+if(input.type==='password'){
+
+input.type='text';
+
+eye.innerText='👁️';
+
+}
+else{
+
+input.type='password';
+
+eye.innerText='🫣';
+
+}
 }
 
-return{
-hasUpper:hasUpper,
-hasLower:hasLower,
-hasNumber:hasNumber,
-hasSpecial:hasSpecial
+function checkPasswordStrength(pw){
+
+let special="!@#$%^&*()_-+=[]{};:'\",.<>?/\\|`~";
+
+let r={hasUpper:false,hasLower:false,hasNumber:false,hasSpecial:false};
+
+for(let i=0;i<pw.length;i++){
+
+let c=pw.charAt(i);
+
+if(c>='A'&&c<='Z'){
+r.hasUpper=true;
+}
+else if(c>='a'&&c<='z'){
+r.hasLower=true;
+}
+else if(c>='0'&&c<='9'){
+r.hasNumber=true;
+}
+else if(special.indexOf(c)!==-1){
+r.hasSpecial=true;
+}
+}
+
+return r;
+}
+
+document.getElementById('businessName').oninput=function(){
+
+let v=this.value.trim();
+
+if(v===''){
+showError('businessName','businessNameError','⚠️ Business name is empty.');
+}
+else if(v.length<2){
+showError('businessName','businessNameError','⚠️ Must be at least 2 characters.');
+}
+else{
+clearError('businessName','businessNameError');
+}
 };
+
+document.getElementById('name').oninput=function(){
+
+let v=this.value.trim();
+
+if(v===''){
+showError('name','nameError','⚠️ This field is empty.');
 }
+else if(v.length<3){
+showError('name','nameError','⚠️ Name must be at least 3 characters.');
+}
+else if(!/^[a-zA-Z\s\u0600-\u06FF]+$/.test(v)){
+showError('name','nameError','⚠️ Name must contain letters only.');
+}
+else{
+clearError('name','nameError');
+}
+};
+
+document.getElementById('email').oninput=function(){
+
+let v=this.value.trim();
+
+let storageKey=(selectedType==='business'?'business_':'user_')+v;
+
+if(v===''){
+showError('email','emailError','⚠️ This field is empty.');
+}
+else if(!v.includes('@')||!v.includes('.')){
+showError('email','emailError','⚠️ Invalid email. Example: name@gmail.com');
+}
+else if(v.indexOf('@')===0||v.endsWith('.')){
+showError('email','emailError','⚠️ Invalid email format.');
+}
+else if(localStorage.getItem(storageKey)){
+showError('email','emailError','⚠️ This email is already registered.');
+}
+else{
+clearError('email','emailError');
+}
+};
+
+document.getElementById('phone').oninput=function(){
+
+this.value=this.value.replace(/[^0-9]/g,'');
+
+let v=this.value;
+
+if(v===''){
+showError('phone','phoneError','⚠️ This field is empty.');
+}
+else if(v.length!==10){
+showError('phone','phoneError','⚠️ Phone must be exactly 10 digits.');
+}
+else if(v[0]!=='0'||v[1]!=='5'){
+showError('phone','phoneError','⚠️ Phone must start with 05.');
+}
+else{
+clearError('phone','phoneError');
+}
+};
+
+document.getElementById('password').oninput=function(){
+
+let v=this.value;
+
+if(v===''){
+showError('password','passwordError','⚠️ This field is empty.');
+return;
+}
+
+if(v.length<8){
+showError('password','passwordError','⚠️ Password must be at least 8 characters.');
+return;
+}
+
+let s=checkPasswordStrength(v);
+
+if(!s.hasUpper){
+showError('password','passwordError','⚠️ Must contain an uppercase letter.');
+}
+else if(!s.hasLower){
+showError('password','passwordError','⚠️ Must contain a lowercase letter.');
+}
+else if(!s.hasNumber){
+showError('password','passwordError','⚠️ Must contain a number.');
+}
+else if(!s.hasSpecial){
+showError('password','passwordError','⚠️ Must contain a special character.');
+}
+else{
+clearError('password','passwordError');
+}
+
+let c=document.getElementById('confirm').value;
+
+if(c!==''){
+
+if(v!==c){
+showError('confirm','confirmError','⚠️ Passwords do not match.');
+}
+else{
+clearError('confirm','confirmError');
+}
+}
+};
+
+document.getElementById('confirm').oninput=function(){
+
+let v=this.value;
+
+let pw=document.getElementById('password').value;
+
+if(v===''){
+showError('confirm','confirmError','⚠️ This field is empty.');
+}
+else if(v!==pw){
+showError('confirm','confirmError','⚠️ Passwords do not match.');
+}
+else{
+clearError('confirm','confirmError');
+}
+};
 
 function register(){
 
 clearErrors();
 
-var name=document.getElementById('name').value.trim();
-var email=document.getElementById('email').value.trim();
-var phone=document.getElementById('phone').value.trim();
-var password=document.getElementById('password').value;
-var confirm=document.getElementById('confirm').value;
+let businessName=document.getElementById('businessName').value.trim();
 
-var isValid=true;
+let name=document.getElementById('name').value.trim();
 
-if(name===""){
+let email=document.getElementById('email').value.trim();
+
+let phone=document.getElementById('phone').value;
+
+let password=document.getElementById('password').value;
+
+let confirm=document.getElementById('confirm').value;
+
+let isValid=true;
+
+if(selectedType==='business'){
+
+if(businessName===''){
+showError('businessName','businessNameError','⚠️ Business name is empty.');
+isValid=false;
+}
+else if(businessName.length<2){
+showError('businessName','businessNameError','⚠️ Must be at least 2 characters.');
+isValid=false;
+}
+}
+
+if(name===''){
 showError('name','nameError','⚠️ This field is empty.');
 isValid=false;
-}else if(name.length<3){
+}
+else if(name.length<3){
 showError('name','nameError','⚠️ Name must be at least 3 characters.');
 isValid=false;
-}else if(!/^[a-zA-Z\s]+$/.test(name)){
-showError('name','nameError','⚠️ Name must contain only letters and spaces.');
+}
+else if(!/^[a-zA-Z\s\u0600-\u06FF]+$/.test(name)){
+showError('name','nameError','⚠️ Name must contain letters only.');
 isValid=false;
 }
 
-if(email===""){
+let storageKey=(selectedType==='business'?'business_':'user_')+email;
+
+if(email===''){
 showError('email','emailError','⚠️ This field is empty.');
 isValid=false;
-}else if(email.indexOf('@')===-1||email.indexOf('.')===-1){
+}
+else if(!email.includes('@')||!email.includes('.')){
 showError('email','emailError','⚠️ Invalid email. Example: name@gmail.com');
 isValid=false;
-}else if(email.indexOf('@')===0||email.indexOf('.')===email.length-1){
+}
+else if(email.indexOf('@')===0||email.endsWith('.')){
 showError('email','emailError','⚠️ Invalid email format.');
 isValid=false;
-}else if(localStorage.getItem('user_'+email)){
+}
+else if(localStorage.getItem(storageKey)){
 showError('email','emailError','⚠️ This email is already registered.');
 isValid=false;
 }
 
-if(phone===""){
+if(phone===''){
 showError('phone','phoneError','⚠️ This field is empty.');
 isValid=false;
-}else if(phone.length!==10){
+}
+else if(phone.length!==10){
 showError('phone','phoneError','⚠️ Phone must be exactly 10 digits.');
 isValid=false;
-}else if(phone.charAt(0)!=='0'||phone.charAt(1)!=='5'){
+}
+else if(phone[0]!=='0'||phone[1]!=='5'){
 showError('phone','phoneError','⚠️ Phone must start with 05.');
 isValid=false;
 }
 
-if(password===""){
+if(password===''){
 showError('password','passwordError','⚠️ This field is empty.');
 isValid=false;
-}else if(password.length<8){
+}
+else if(password.length<8){
 showError('password','passwordError','⚠️ Password must be at least 8 characters.');
 isValid=false;
-}else{
-var strength=checkPasswordStrength(password);
+}
+else{
 
-if(!strength.hasUpper){
-showError('password','passwordError','⚠️ Password must contain an uppercase letter.');
+let s=checkPasswordStrength(password);
+
+if(!s.hasUpper){
+showError('password','passwordError','⚠️ Must contain an uppercase letter.');
 isValid=false;
-}else if(!strength.hasLower){
-showError('password','passwordError','⚠️ Password must contain a lowercase letter.');
+}
+else if(!s.hasLower){
+showError('password','passwordError','⚠️ Must contain a lowercase letter.');
 isValid=false;
-}else if(!strength.hasNumber){
-showError('password','passwordError','⚠️ Password must contain a number.');
+}
+else if(!s.hasNumber){
+showError('password','passwordError','⚠️ Must contain a number.');
 isValid=false;
-}else if(!strength.hasSpecial){
-showError('password','passwordError','⚠️ Password must contain a special character.');
+}
+else if(!s.hasSpecial){
+showError('password','passwordError','⚠️ Must contain a special character.');
 isValid=false;
 }
 }
 
-if(confirm===""){
+if(confirm===''){
 showError('confirm','confirmError','⚠️ This field is empty.');
 isValid=false;
-}else if(password!==confirm){
+}
+else if(password!==confirm){
 showError('confirm','confirmError','⚠️ Passwords do not match.');
 isValid=false;
 }
 
-if(isValid===false){
+if(!isValid){
 return;
 }
 
-var user={
+let userData={
 name:name,
 email:email,
 phone:phone,
 password:password
 };
 
-localStorage.setItem('user_'+email,JSON.stringify(user));
+if(selectedType==='business'){
+userData.businessName=businessName;
+}
+
+localStorage.setItem(storageKey,JSON.stringify(userData));
 
 alert('✅ Account created successfully!\nYou can now log in.');
 
 location.href='log.html';
 }
 
-document.getElementById('name').oninput=function(){
-
-let name=this.value.trim();
-
-if(name===""){
-showError('name','nameError','⚠️ This field is empty.');
-}else if(name.length<3){
-showError('name','nameError','⚠️ Name must be at least 3 characters.');
-}else if(!/^[a-zA-Z\s]+$/.test(name)){
-showError('name','nameError','⚠️ Name must contain only letters and spaces.');
-}else{
-document.getElementById('nameError').style.display='none';
-document.getElementById('name').classList.remove('input-error');
-}
-};
-
-document.getElementById('email').oninput=function(){
-
-let email=this.value.trim();
-
-if(email===""){
-showError('email','emailError','⚠️ This field is empty.');
-}else if(email.indexOf('@')===-1||email.indexOf('.')===-1){
-showError('email','emailError','⚠️ Invalid email. Example: name@gmail.com');
-}else if(email.indexOf('@')===0||email.indexOf('.')===email.length-1){
-showError('email','emailError','⚠️ Invalid email format.');
-}else if(localStorage.getItem('user_'+email)){
-showError('email','emailError','⚠️ This email is already registered.');
-}else{
-document.getElementById('emailError').style.display='none';
-document.getElementById('email').classList.remove('input-error');
-}
-};
-
-document.getElementById('phone').oninput=function(){
-
-let phone=this.value.trim();
-
-if(phone===""){
-showError('phone','phoneError','⚠️ This field is empty.');
-}else if(phone.length!==10){
-showError('phone','phoneError','⚠️ Phone must be exactly 10 digits.');
-}else if(phone.charAt(0)!=='0'||phone.charAt(1)!=='5'){
-showError('phone','phoneError','⚠️ Phone must start with 05.');
-}else{
-document.getElementById('phoneError').style.display='none';
-document.getElementById('phone').classList.remove('input-error');
-}
-};
-
-document.getElementById('password').oninput=function(){
-
-let password=this.value.trim();
-
-if(password===""){
-showError('password','passwordError','⚠️ This field is empty.');
-}else if(password.length<8){
-showError('password','passwordError','⚠️ Password must be at least 8 characters.');
-}else{
-
-var strength=checkPasswordStrength(password);
-
-if(!strength.hasUpper){
-showError('password','passwordError','⚠️ Password must contain an uppercase letter.');
-}else if(!strength.hasLower){
-showError('password','passwordError','⚠️ Password must contain a lowercase letter.');
-}else if(!strength.hasNumber){
-showError('password','passwordError','⚠️ Password must contain a number.');
-}else if(!strength.hasSpecial){
-showError('password','passwordError','⚠️ Password must contain a special character.');
-}else{
-document.getElementById('passwordError').style.display='none';
-document.getElementById('password').classList.remove('input-error');
-}
-}
-};
 </script>
 
 </body>
+
 </html>
