@@ -511,57 +511,6 @@ hideError("businessNameError");
 
 };
 
-document.getElementById("city").onchange=function(){
-
-if(this.value===""){
-showError("cityError","⚠️ Select a city.");
-}
-else{
-hideError("cityError");
-}
-
-};
-
-document.getElementById("district").oninput=function(){
-
-let district=this.value.trim();
-
-if(district===""){
-showError("districtError","⚠️ District is empty.");
-}
-else{
-hideError("districtError");
-}
-
-};
-
-document.getElementById("price").oninput=function(){
-
-let price=this.value;
-
-if(price===""){
-showError("priceError","⚠️ Price is empty.");
-}
-else if(price<=0){
-showError("priceError","⚠️ Enter valid price.");
-}
-else{
-hideError("priceError");
-}
-
-};
-
-document.getElementById("teamSize").onchange=function(){
-
-if(this.value===""){
-showError("teamSizeError","⚠️ Select team size.");
-}
-else{
-hideError("teamSizeError");
-}
-
-};
-
 document.getElementById("ownerName").oninput=function(){
 
 let name=this.value.trim();
@@ -587,11 +536,11 @@ let phone=this.value;
 if(phone===""){
 showError("phoneError","⚠️ Phone is empty.");
 }
-else if(!phone.startsWith("05")){
-showError("phoneError","⚠️ Phone must start with 05.");
-}
 else if(phone.length!==10){
 showError("phoneError","⚠️ Phone must be 10 digits.");
+}
+else if(phone.charAt(0)!=="0" || phone.charAt(1)!=="5"){
+showError("phoneError","⚠️ Phone must start with 05.");
 }
 else{
 hideError("phoneError");
@@ -603,12 +552,10 @@ document.getElementById("email").oninput=function(){
 
 let email=this.value.trim();
 
-let pattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 if(email===""){
 showError("emailError","⚠️ Email is empty.");
 }
-else if(!pattern.test(email)){
+else if(!email.includes("@") || !email.includes(".")){
 showError("emailError","⚠️ Invalid email.");
 }
 else{
@@ -617,97 +564,99 @@ hideError("emailError");
 
 };
 
-document.getElementById("callTime").onchange=function(){
-
-if(this.value===""){
-showError("callTimeError","⚠️ Select preferred time.");
-}
-else{
-hideError("callTimeError");
-}
-
-};
-
-let services=document.querySelectorAll(".services-grid input");
-
-services.forEach(function(service){
-
-service.onchange=function(){
-
-let checked=false;
-
-services.forEach(function(item){
-
-if(item.checked){
-checked=true;
-}
-
-});
-
-if(!checked){
-showError("servicesError","⚠️ Select at least one service.");
-}
-else{
-hideError("servicesError");
-}
-
-};
-
-});
-
 function submitForm(){
 
-document.getElementById("businessName").oninput();
-document.getElementById("city").onchange();
-document.getElementById("district").oninput();
-document.getElementById("price").oninput();
-document.getElementById("teamSize").onchange();
-document.getElementById("ownerName").oninput();
-document.getElementById("phone").oninput();
-document.getElementById("email").oninput();
-document.getElementById("callTime").onchange();
-
-let checked=false;
-let selectedServices="";
-
-services.forEach(function(service){
-
-if(service.checked){
-checked=true;
-selectedServices+=service.value+", ";
-}
-
-});
-
-if(!checked){
-showError("servicesError","⚠️ Select at least one service.");
-}
-else{
-hideError("servicesError");
-}
-
-let errors=document.querySelectorAll(".error-msg");
 let isValid=true;
 
-errors.forEach(function(error){
+let businessName=document.getElementById("businessName").value.trim();
+let city=document.getElementById("city").value;
+let district=document.getElementById("district").value.trim();
+let price=document.getElementById("price").value;
+let teamSize=document.getElementById("teamSize").value;
+let ownerName=document.getElementById("ownerName").value.trim();
+let phone=document.getElementById("phone").value;
+let email=document.getElementById("email").value.trim();
+let callTime=document.getElementById("callTime").value;
 
-if(error.style.display==="block"){
+if(businessName===""){
+showError("businessNameError","⚠️ Business name is empty.");
 isValid=false;
 }
 
-});
+if(city===""){
+showError("cityError","⚠️ Select a city.");
+isValid=false;
+}
+
+if(district===""){
+showError("districtError","⚠️ District is empty.");
+isValid=false;
+}
+
+if(price===""){
+showError("priceError","⚠️ Price is empty.");
+isValid=false;
+}
+
+if(teamSize===""){
+showError("teamSizeError","⚠️ Select team size.");
+isValid=false;
+}
+
+if(ownerName===""){
+showError("ownerNameError","⚠️ Name is empty.");
+isValid=false;
+}
+
+if(phone.length!==10){
+showError("phoneError","⚠️ Invalid phone.");
+isValid=false;
+}
+
+if(email===""){
+showError("emailError","⚠️ Email is empty.");
+isValid=false;
+}
+
+if(callTime===""){
+showError("callTimeError","⚠️ Select preferred time.");
+isValid=false;
+}
+
+let services=document.querySelectorAll(".services-grid input");
+let checked=false;
+let selectedServices="";
+
+for(let i=0;i<services.length;i++){
+
+if(services[i].checked){
+
+checked=true;
+selectedServices+=services[i].value+", ";
+
+}
+
+}
+
+if(!checked){
+showError("servicesError","⚠️ Select at least one service.");
+isValid=false;
+}
+else{
+hideError("servicesError");
+}
 
 if(isValid===false){
 return;
 }
 
 document.getElementById("modalSummary").innerHTML=
-"<p><strong>Business:</strong> "+document.getElementById("businessName").value+"</p>"+
-"<p><strong>City:</strong> "+document.getElementById("city").value+"</p>"+
+"<p><strong>Business:</strong> "+businessName+"</p>"+
+"<p><strong>City:</strong> "+city+"</p>"+
 "<p><strong>Services:</strong> "+selectedServices+"</p>"+
-"<p><strong>Owner:</strong> "+document.getElementById("ownerName").value+"</p>"+
-"<p><strong>Phone:</strong> "+document.getElementById("phone").value+"</p>"+
-"<p><strong>Email:</strong> "+document.getElementById("email").value+"</p>";
+"<p><strong>Owner:</strong> "+ownerName+"</p>"+
+"<p><strong>Phone:</strong> "+phone+"</p>"+
+"<p><strong>Email:</strong> "+email+"</p>";
 
 document.getElementById("modal").style.display="flex";
 

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>BookMySalon - Home</title>
+
 <style>
 *{
 box-sizing:border-box;
@@ -306,10 +307,11 @@ font-size:14px;
 <body>
 
 <header>
+
 <div class="logo">BookMySalon</div>
-<nav class="header-buttons" id="headerButtons">
-    
-</nav>
+
+<nav class="header-buttons" id="headerButtons"></nav>
+
 </header>
 
 <main>
@@ -317,15 +319,19 @@ font-size:14px;
 <section class="hero">
 
 <div class="hero-text">
+
 <h1>Book My Salon</h1>
 
 <p>
 Welcome to BookMySalon! We connect you with the finest salons across the Eastern Province including Dammam, Khobar and Dhahran. Schedule your appointments easily and discover beauty, comfort and quality all in one place.
 </p>
+
 </div>
 
 <figure class="hero-image">
+
 <img src="Salon55.jpeg" alt="Salon">
+
 </figure>
 
 </section>
@@ -339,10 +345,23 @@ Discover top-rated salons in your city
 </p>
 
 <nav class="filter-buttons">
-<button onclick="filterSalons('All')" id="btnAll" class="active">All</button>
-<button onclick="filterSalons('Dammam')" id="btnDammam">Dammam</button>
-<button onclick="filterSalons('Khobar')" id="btnKhobar">Khobar</button>
-<button onclick="filterSalons('Dhahran')" id="btnDhahran">Dhahran</button>
+
+<button onclick="filterSalons('All')" id="btnAll" class="active">
+All
+</button>
+
+<button onclick="filterSalons('Dammam')" id="btnDammam">
+Dammam
+</button>
+
+<button onclick="filterSalons('Khobar')" id="btnKhobar">
+Khobar
+</button>
+
+<button onclick="filterSalons('Dhahran')" id="btnDhahran">
+Dhahran
+</button>
+
 </nav>
 
 <section class="salons-grid" id="salonsGrid"></section>
@@ -351,21 +370,32 @@ Discover top-rated salons in your city
 
 <section class="stats">
 
-<h2 class="stats-title">BookMySalon by the Numbers</h2>
+<h2 class="stats-title">
+BookMySalon by the Numbers
+</h2>
 
 <article class="stat-item">
+
 <div class="stat-number">6</div>
+
 <div class="stat-label">Partner Salons</div>
+
 </article>
 
 <article class="stat-item">
+
 <div class="stat-number">3</div>
+
 <div class="stat-label">Cities Covered</div>
+
 </article>
 
 <article class="stat-item">
+
 <div class="stat-number">4.6</div>
+
 <div class="stat-label">Average Rating</div>
+
 </article>
 
 </section>
@@ -373,6 +403,7 @@ Discover top-rated salons in your city
 </main>
 
 <footer>
+
 <p>
 Contact us:
 <a href="https://wa.me/966580417226" target="_blank">
@@ -380,10 +411,12 @@ Contact us:
 </a>
 </p>
 
-<p>&copy; 2026 BookMySalon.All rights reserved.</p>
+<p>&copy; 2026 BookMySalon. All rights reserved.</p>
+
 </footer>
 
 <script>
+
 let salons=[
 {name:"Beauty Venue Salon",city:"Khobar",location:"Shorofat Park",rating:"Rating: 4.9/5",price:"From 250 SAR",page:"kho 1.html",image:"bv.jpg"},
 {name:"Spa 29",city:"Khobar",location:"Al Shamaliah",rating:"Rating: 4.8/5",price:"From 250 SAR",page:"kho 2.html",image:"spa 29.jpg"},
@@ -394,15 +427,20 @@ let salons=[
 ];
 
 function displaySalons(salonList){
+
 let grid=document.getElementById("salonsGrid");
+
 grid.innerHTML="";
 
 if(salonList.length===0){
-grid.innerHTML="<p style='text-align:center;color:#888;grid-column:1/-1;'>No salons found in this city.</p>";
+
+grid.innerHTML="<p style='text-align:center; color:#888; grid-column:1/-1;'>No salons found in this city.</p>";
+
 return;
 }
 
 for(let i=0;i<salonList.length;i++){
+
 let s=salonList[i];
 
 grid.innerHTML+=`
@@ -419,10 +457,15 @@ grid.innerHTML+=`
 }
 
 function filterSalons(city){
+
 document.getElementById("btnAll").className="";
+
 document.getElementById("btnDammam").className="";
+
 document.getElementById("btnKhobar").className="";
+
 document.getElementById("btnDhahran").className="";
+
 document.getElementById("btn"+city).className="active";
 
 if(city==="All"){
@@ -433,6 +476,7 @@ return;
 let filtered=[];
 
 for(let i=0;i<salons.length;i++){
+
 if(salons[i].city===city){
 filtered.push(salons[i]);
 }
@@ -442,24 +486,31 @@ displaySalons(filtered);
 }
 
 function scrollToSalons(){
-document.getElementById("salonsSection").scrollIntoView({behavior:"smooth"});
+
+document.getElementById('salonsSection').scrollIntoView({behavior:'smooth'});
+
 }
 
 function updateHeader(){
+
 let headerButtons=document.getElementById("headerButtons");
+
 let loggedInUser=localStorage.getItem("loggedInUser");
 
 if(loggedInUser!==null){
+
 headerButtons.innerHTML=`
 <span class="welcome-msg">Welcome, ${loggedInUser}</span>
 <button class="view-salons-link" onclick="scrollToSalons()">View Salons</button>
-<button class="business-link" onclick="location.href='list_business.html'">List Your Business</button>
+<button class="business-link" onclick="location.href='listt-business.html'">List Your Business</button>
 <button onclick="logoutUser()">Logout</button>
 `;
-}else{
+}
+else{
+
 headerButtons.innerHTML=`
 <button class="view-salons-link" onclick="scrollToSalons()">View Salons</button>
-<button class="business-link" onclick="location.href='list_business.html'">List Your Business</button>
+<button class="business-link" onclick="location.href='listt-business.html'">List Your Business</button>
 <button onclick="location.href='log.html'">Login</button>
 <button onclick="location.href='register.html'">Register</button>
 `;
@@ -467,14 +518,21 @@ headerButtons.innerHTML=`
 }
 
 function logoutUser(){
+
 localStorage.removeItem("loggedInUser");
+
 location.reload();
+
 }
 
 window.onload=function(){
+
 updateHeader();
+
 displaySalons(salons);
+
 };
+
 </script>
 
 </body>
